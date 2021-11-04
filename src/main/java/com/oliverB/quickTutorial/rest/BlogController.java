@@ -1,29 +1,34 @@
-package com.oliverB.quickTutorial.controllers;
+package com.oliverB.quickTutorial.rest;
 
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.oliverB.quickTutorial.dto.BlogPostDto;
+import com.oliverB.quickTutorial.service.BlogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @Controller
 public class BlogController {
-    ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 
-    @GetMapping("/blog")
-    public String loadPage(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "greeting";
+    private BlogService blogService;
+
+    public BlogController(BlogService blogService) {
+        this.blogService = blogService;
     }
 
-    @PostMapping("/newblogpost")
-    public String postNewBlogPost(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        context.getBean("")
-        model.addAttribute("name", name);
-        return "greeting";
+    @GetMapping("/blog")
+    public String loadPage(Model model) {
+        model.addAttribute("blogPostDto", new BlogPostDto());
+        model.addAttribute("blogposts", blogService.getAllPosts());
+        return "blog";
+    }
+
+    @PostMapping(value = "/blog/newblogpost")
+    public String postNewBlogPost(Model model, @ModelAttribute BlogPostDto blogPostDto) {
+        blogService.saveNewPost(blogPostDto);
+        return "redirect:/blog";
     }
 
 
