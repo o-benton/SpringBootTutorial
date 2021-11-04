@@ -1,4 +1,4 @@
-package com.oliverB.quickTutorial.controllers;
+package com.oliverB.quickTutorial.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
