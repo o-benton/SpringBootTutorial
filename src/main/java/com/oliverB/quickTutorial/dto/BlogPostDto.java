@@ -1,8 +1,20 @@
 package com.oliverB.quickTutorial.dto;
 
-public class BlogPost {
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class BlogPostDto {
 
     String content;
     String author;
+
+//    public BlogPostDto(String content, String author) {
+//        this.content = content;
+//        this.author = author;
+//    }
+
 
 }

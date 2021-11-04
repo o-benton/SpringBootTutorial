@@ -1,4 +1,4 @@
-package com.oliverB.quickTutorial.dto;
+package com.oliverB.quickTutorial.dao;
 
 
 import lombok.Getter;
@@ -6,9 +6,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BlogPostDto {
+public class BlogPostDao {
 
-    String content;
-    String author;
+    private String content;
+    private String author;
+
+    public BlogPostDao(String content, String author) {
+        this.content = content;
+        this.author = author;
+    }
+
 
 }
