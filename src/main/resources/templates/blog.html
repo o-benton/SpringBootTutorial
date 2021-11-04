@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Blog Posts</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-$END$
+
+<div>
+  <h1>Create a new blog post:</h1>
+  <form action="#" th:action="@{/blog/newblogpost}" th:object="${blogPostDto}"
+        method="post">
+    <fieldset>
+      <input id="author" placeholder="Enter your name" required type="text" th:field="*{author}"/>
+      <input id="content" placeholder="Your post" required type="text" th:field="*{content}"/>
+    </fieldset>
+    <input type="submit" id="submitButton" th:value="Post">
+
+  </form>
+</div>
+<div>
+  <h1>Existing blog posts:</h1>
+  <div th:if="${ not#lists.isEmpty(blogposts)}">
+    <table>
+      <tr>
+        <th>Author</th>
+        <th>Content</th>
+      </tr>
+      <tr th:each="blogpostdao : ${blogposts}">
+        <td th:text="${blogpostdao.author}"></td>
+        <td th:text="${blogpostdao.content}"></td>
+      </tr>
+      <table>
+  </div>
+</div>
 </body>
 </html>
