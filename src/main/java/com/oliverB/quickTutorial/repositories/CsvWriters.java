@@ -1,6 +1,7 @@
-package com.oliverB.quickTutorial;
+package com.oliverB.quickTutorial.repositories;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,10 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
+@Service
+public class CsvWriters {
 
-public class CSVController {
-
-    @Bean
     public Object[] readCSVFile(String input_file_name) throws FileNotFoundException, IOException {
         Object[] data_records = null;
         List<List<String>> records = new ArrayList<>();
@@ -25,7 +25,6 @@ public class CSVController {
         return data_records;
     }
 
-    @Bean
     public void saveCSVFile(String[][] table, String fileName, boolean appending) throws IOException {
         FileWriter writer = null;
         File file = new File(fileName + ".csv");
